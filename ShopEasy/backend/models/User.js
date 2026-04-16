@@ -5,33 +5,46 @@ const userSchema = mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: [true, 'Please add a name'],
+      trim: true,
     },
     email: {
       type: String,
-      required: true,
+      required: [true, 'Please add an email'],
       unique: true,
+      trim: true,
+      lowercase: true,
+      match: [
+        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+        'Please add a valid email',
+      ],
     },
     password: {
       type: String,
-      required: true,
+      required: [true, 'Please add a password'],
+      minlength: 6,
     },
-    isAdmin: {
-      type: Boolean,
-      required: true,
-      default: false,
+    address: {
+      street: String,
+      city: String,
+      state: String,
+      postalCode: String,
+      country: String,
     },
   },
   {
-    timestamps: true,
+    timestamps: true, // Automatically manages createdAt and updatedAt
   }
 );
 
+// Method to verify if entered password matches the hashed password
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
+// Pre-save hook to hash password before saving to the database
 userSchema.pre('save', async function (next) {
+  // Only hash if the password has been modified or is new
   if (!this.isModified('password')) {
     next();
   }
