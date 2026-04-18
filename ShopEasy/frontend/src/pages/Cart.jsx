@@ -6,6 +6,8 @@ import API from '../services/api';
 import Loader from '../components/Loader';
 import EmptyState from '../components/EmptyState';
 
+import { formatPrice } from '../utils/format';
+
 const Cart = () => {
   const [cart, setCart] = useState({ items: [] });
   const [loading, setLoading] = useState(true);
@@ -51,7 +53,7 @@ const Cart = () => {
   if (loading) return <Loader className="mt-20" />;
 
   const totalItems = cart.items.reduce((acc, item) => acc + item.quantity, 0);
-  const totalPrice = cart.items.reduce((acc, item) => acc + (item.quantity * (item.product?.price || 0)), 0).toFixed(2);
+  const totalPrice = cart.items.reduce((acc, item) => acc + (item.quantity * (item.product?.price || 0)), 0);
 
   return (
     <div className="container mx-auto px-4 max-w-5xl">
@@ -75,7 +77,7 @@ const Cart = () => {
                      <Link to={`/product/${item.product?._id}`} className="text-lg font-semibold text-slate-800 hover:text-blue-600">
                        {item.product?.name}
                      </Link>
-                     <p className="text-slate-500 mt-1">${item.product?.price}</p>
+                     <p className="text-slate-500 mt-1">{formatPrice(item.product?.price)}</p>
                   </div>
 
                   <div className="flex items-center gap-4">
@@ -103,7 +105,7 @@ const Cart = () => {
                 <h3 className="text-xl font-bold mb-4 border-b border-slate-700 pb-4">Order Summary</h3>
                 <div className="flex justify-between mb-3 text-slate-300">
                    <span>Items ({totalItems})</span>
-                   <span>${totalPrice}</span>
+                   <span>{formatPrice(totalPrice)}</span>
                 </div>
                 <div className="flex justify-between mb-6 text-slate-300">
                    <span>Shipping</span>
@@ -111,7 +113,7 @@ const Cart = () => {
                 </div>
                 <div className="flex justify-between items-center mb-6 pt-4 border-t border-slate-700">
                    <span className="font-semibold text-lg">Total</span>
-                   <span className="font-bold text-2xl">${totalPrice}</span>
+                   <span className="font-bold text-2xl">{formatPrice(totalPrice)}</span>
                 </div>
                 <Link to="/checkout" className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl flex justify-center items-center transition-colors shadow-lg">
                    Proceed to Checkout

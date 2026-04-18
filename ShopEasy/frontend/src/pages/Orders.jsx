@@ -6,6 +6,8 @@ import API from '../services/api';
 import Loader from '../components/Loader';
 import EmptyState from '../components/EmptyState';
 
+import { formatPrice } from '../utils/format';
+
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -57,7 +59,7 @@ const Orders = () => {
                 </div>
                 <div>
                    <p className="text-sm text-slate-500 uppercase tracking-wider font-semibold">Total Price</p>
-                   <p className="text-xl font-bold text-slate-900">${order.totalAmount}</p>
+                   <p className="text-xl font-bold text-slate-900">{formatPrice(order.totalAmount)}</p>
                 </div>
               </div>
               
@@ -72,7 +74,7 @@ const Orders = () => {
                           <Link to={`/product/${item.product}`} className="font-medium text-slate-800 hover:text-blue-600">
                             {item.name}
                           </Link>
-                          <p className="text-sm text-slate-500">Qty: {item.quantity} × ${item.price}</p>
+                          <p className="text-sm text-slate-500">Qty: {item.quantity} × {formatPrice(item.price)}</p>
                       </div>
                     </div>
                   ))}

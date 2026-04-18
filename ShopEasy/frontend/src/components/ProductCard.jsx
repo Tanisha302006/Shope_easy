@@ -1,66 +1,85 @@
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Star } from 'lucide-react';
+import { ShoppingBag, Star } from 'lucide-react';
+import toast from 'react-hot-toast';
+import API from '../services/api';
+import { formatPrice } from '../utils/format';
 
 const ProductCard = ({ product }) => {
-  // Safe defaults
-  const rating = product.rating || 0;
   const inStock = product.stock > 0;
+  
+  const quickAddToCart = async (e) => {
+    e.preventDefault();
+    if (!localStorage.getItem('userInfo')) {
+      toast.error('Please sign in to access your Bag.');
+      return;
+    }
+    try {
+      await API.post('/cart', { productId: product._id, quantity: 1 });
+      toast.success(`${product.name} added to Bag!`);
+    } catch (error) {
+      toast.error('Error adding ' + product.name);
+    }
+  };
 
   return (
-    <div className="group flex flex-col bg-white rounded-3xl shadow-sm hover:shadow-2xl border border-gray-100 overflow-hidden transition-all duration-500 hover:-translate-y-2 relative h-full">
+    <div className="group flex flex-col bg-white rounded-[2.5rem] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 overflow-hidden transition-all duration-700 hover:shadow-[0_30px_60px_rgba(0,0,0,0.12)] hover:-translate-y-3 relative h-[500px]">
       
-      {/* Image Block & Badges */}
-      <div className="relative h-60 w-full overflow-hidden bg-gray-50 flex items-center justify-center p-4">
-        {/* Stock status badge */}
-        <div className="absolute top-4 left-4 z-10">
-          <span className={`px-3 py-1 text-[11px] font-black uppercase tracking-wider rounded-lg shadow-sm backdrop-blur-md ${inStock ? 'bg-white/80 text-emerald-700' : 'bg-red-500/90 text-white'}`}>
-            {inStock ? 'In Stock' : 'Sold Out'}
-          </span>
-        </div>
+      {/* Immersive Image Display */}
+      <Link to={`/product/${product._id}`} className="relative h-64 w-full flex items-center justify-center p-10 bg-gradient-to-b from-slate-50/50 to-white overflow-hidden">
+        {/* Modern Out of Stock Overlay */}
+        {!inStock && (
+           <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-10 flex items-center justify-center">
+             <span className="px-4 py-2 bg-slate-900 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-full">
+               Sold Out
+             </span>
+           </div>
+        )}
         
-        {/* Category tag */}
-        <div className="absolute top-4 right-4 z-10">
-          <span className="px-2 py-1 bg-slate-900/10 backdrop-blur-md text-slate-800 text-[10px] uppercase font-bold rounded-md">
-            {product.category || 'Item'}
-          </span>
-        </div>
+        {/* Subtle decorative circle */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-blue-50 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
 
         <img 
           src={product.image || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80'} 
           alt={product.name}
-          className="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-700 ease-in-out"
+          className="max-h-full object-contain mix-blend-multiply z-10 scale-95 group-hover:scale-105 transition-transform duration-700 cubic-bezier(0.34, 1.56, 0.64, 1)"
         />
+      </Link>
 
-        {/* Quick add overlay */}
-        <div className="absolute -bottom-16 w-full px-4 group-hover:bottom-4 transition-all duration-300 z-20">
-           <button disabled={!inStock} className="w-full bg-slate-900/90 backdrop-blur-sm text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-blue-600 transition-colors shadow-lg active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed">
-              <ShoppingCart className="w-4 h-4" /> Quick Add
-           </button>
+      {/* Elegant Details Box */}
+      <div className="p-8 flex flex-col flex-grow bg-white">
+        <div className="flex justify-between items-center mb-4">
+           <span className="text-[10px] font-black text-blue-600 uppercase tracking-[0.2em] px-2 py-1 bg-blue-50 rounded-md">
+             {product.category}
+           </span>
+           <div className="flex items-center gap-1.5 px-2 py-1 bg-slate-50 rounded-md">
+              <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+              <span className="text-[11px] font-bold text-slate-700">{product.rating || '5.0'}</span>
+           </div>
         </div>
-      </div>
-
-      {/* Details Box */}
-      <div className="p-6 flex flex-col flex-grow">
-        <Link to={`/product/${product._id}`} className="block flex-grow focus:outline-none">
-           <h3 className="text-xl font-extrabold text-slate-900 line-clamp-1 mb-2 group-hover:text-blue-600 transition-colors duration-200">
+        
+        <Link to={`/product/${product._id}`}>
+           <h3 className="text-xl font-bold text-slate-900 leading-[1.2] mb-3 tracking-tight group-hover:text-blue-600 transition-colors duration-300 line-clamp-2">
              {product.name}
            </h3>
-           <p className="text-sm text-slate-500 line-clamp-2 mb-4 leading-relaxed font-medium">
-             {product.description}
-           </p>
         </Link>
         
-        <div className="flex items-end justify-between mt-auto pt-4 border-t border-gray-50">
-          <div className="flex flex-col">
-            {/* Mock Rating Component */}
-            <div className="flex items-center gap-1 mb-1">
-              <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-              <span className="text-xs font-bold text-slate-700">{rating.toFixed(1)}</span>
-            </div>
-            <p className="text-2xl font-black text-slate-900 tracking-tight">
-              ${Number(product.price).toFixed(2)}
-            </p>
-          </div>
+        <p className="text-sm text-slate-400 font-medium line-clamp-2 mb-6">
+          {product.description || 'Experience cutting-edge design and unparalleled performance.'}
+        </p>
+
+        {/* Footer Actions */}
+        <div className="mt-auto pt-4 flex items-center justify-between">
+          <p className="text-2xl font-black text-slate-900 tracking-tighter">
+            {formatPrice(product.price)}
+          </p>
+          
+          <button 
+             onClick={quickAddToCart}
+             disabled={!inStock} 
+             className="bg-slate-900 hover:bg-black text-white p-3.5 rounded-2xl transition-all duration-300 active:scale-90 disabled:bg-slate-100 disabled:text-slate-300 disabled:cursor-not-allowed group/btn shadow-lg shadow-slate-900/10 hover:shadow-slate-900/20"
+          >
+             <ShoppingBag className="w-5 h-5 group-hover/btn:scale-110 transition-transform duration-300" />
+          </button>
         </div>
       </div>
     </div>

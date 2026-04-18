@@ -1,86 +1,112 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Laptop, Shirt, Sofa, Headphones, ShieldCheck, Truck, Clock } from 'lucide-react';
+import { ArrowRight, Zap, Shield, CreditCard } from 'lucide-react';
 
 const Home = () => {
-  const categories = [
-    { name: 'Electronics', icon: Laptop, color: 'bg-indigo-100 text-indigo-600', link: '/products?category=Electronics' },
-    { name: 'Fashion', icon: Shirt, color: 'bg-pink-100 text-pink-600', link: '/products?category=Clothing' },
-    { name: 'Home Furniture', icon: Sofa, color: 'bg-amber-100 text-amber-600', link: '/products?category=Furniture' },
-    { name: 'Accessories', icon: Headphones, color: 'bg-emerald-100 text-emerald-600', link: '/products?category=Accessories' },
-  ];
-
   return (
-    <div className="w-full">
-      {/* 🚀 Immersive Hero Section */}
-      <section className="relative w-full bg-slate-900 text-white overflow-hidden rounded-[2.5rem] mx-auto mt-4 max-w-[96%] xl:max-w-7xl shadow-2xl">
-        <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent"></div>
-        <div className="relative px-8 py-24 md:py-32 lg:px-16 flex flex-col items-start z-10 w-full max-w-3xl">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-blue-600/20 text-blue-300 font-bold text-sm tracking-widest uppercase mb-6 border border-blue-500/30">
-            Next-Gen E-Commerce
-          </span>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
-            Elevate Your <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Shopping Standard.</span>
-          </h1>
-          <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-xl leading-relaxed">
-            Discover a curated collection of premium electronics, lifestyle apparel, and modern furniture at prices you won't believe.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-            <Link to="/products" className="bg-white text-slate-900 hover:bg-gray-100 px-8 py-4 rounded-xl font-bold transition-all shadow-xl hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-2 group">
-              Shop Now <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link to="/login" className="bg-slate-800 text-white border border-slate-700 hover:bg-slate-700 px-8 py-4 rounded-xl font-bold transition-all active:scale-95 flex items-center justify-center">
-              Create Account
-            </Link>
+    <div className="w-full bg-white min-h-screen">
+      
+      {/* 🚀 Pro Hero Section */}
+      <section className="relative w-full pt-20 md:pt-32 pb-24 md:pb-40 px-6 overflow-hidden mesh-gradient">
+        <div className="container mx-auto flex flex-col items-center text-center max-w-6xl z-10 relative">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 mb-8 animate-fade-in-up">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+            </span>
+            <span className="text-sm font-bold text-blue-600 tracking-wide uppercase">New Collection Live</span>
           </div>
-        </div>
-      </section>
 
-      {/* 📦 Value Proposition Bar */}
-      <section className="container mx-auto px-6 py-12 max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-8 border-y border-gray-100">
-           <div className="flex flex-col items-center text-center px-4">
-              <div className="h-16 w-16 bg-blue-50 rounded-full flex items-center justify-center mb-4 text-blue-600"><Truck className="w-8 h-8"/></div>
-              <h4 className="font-bold text-lg text-slate-800 mb-2">Free Global Shipping</h4>
-              <p className="text-slate-500 text-sm">On all orders spanning over $150.00.</p>
-           </div>
-           <div className="flex flex-col items-center text-center px-4 md:border-x border-gray-100">
-              <div className="h-16 w-16 bg-emerald-50 rounded-full flex items-center justify-center mb-4 text-emerald-600"><ShieldCheck className="w-8 h-8"/></div>
-              <h4 className="font-bold text-lg text-slate-800 mb-2">Secure Payments</h4>
-              <p className="text-slate-500 text-sm">100% secure processing with Stripe & PayPal.</p>
-           </div>
-           <div className="flex flex-col items-center text-center px-4">
-              <div className="h-16 w-16 bg-rose-50 rounded-full flex items-center justify-center mb-4 text-rose-600"><Clock className="w-8 h-8"/></div>
-              <h4 className="font-bold text-lg text-slate-800 mb-2">24/7 Dedicated Support</h4>
-              <p className="text-slate-500 text-sm">Our expert team is here for you anytime.</p>
-           </div>
-        </div>
-      </section>
+          <h1 className="text-6xl md:text-[100px] font-black tracking-tighter text-slate-900 mb-8 leading-[0.85] animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+            Elevate your <br/> 
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600 animate-gradient">
+              digital lifestyle.
+            </span>
+          </h1>
 
-      {/* ✨ Beautiful Category Cards */}
-      <section className="container mx-auto px-6 py-16 max-w-7xl">
-        <div className="flex justify-between items-end mb-10">
-          <div>
-             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Shop by Category</h2>
-             <p className="text-slate-500 mt-2 text-lg">Browse our highly tailored micro-markets.</p>
+          <p className="text-xl md:text-2xl text-slate-500 mb-12 max-w-3xl font-medium tracking-tight leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            Experience the pinnacle of design and technology with ShopEasy. 
+            Discover curated collections that redefine the modern boundary.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-6 items-center animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+            <Link to="/products" className="bg-slate-900 hover:bg-black text-white px-10 py-5 rounded-2xl font-bold text-lg transition-all shadow-[0_20px_40px_rgba(0,0,0,0.15)] hover:-translate-y-1 hover:shadow-[0_25px_50px_rgba(0,0,0,0.2)] active:scale-95">
+              Explore the Store
+            </Link>
+            <Link to="/products" className="text-slate-900 hover:text-blue-600 font-bold text-xl flex items-center gap-2 group transition-colors">
+              Learn more <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+            </Link>
           </div>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {categories.map((cat, idx) => (
-            <Link key={idx} to={cat.link} className="group relative bg-white border border-gray-100 p-8 rounded-3xl hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden flex flex-col items-center justify-center text-center">
-              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-150 transition-transform duration-700">
-                 <cat.icon className="w-32 h-32" />
+        {/* Dynamic Background */}
+        <div className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] bg-blue-400/10 rounded-full blur-[120px] animate-float opacity-70"></div>
+        <div className="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] bg-purple-400/10 rounded-full blur-[100px] animate-float opacity-70" style={{ animationDelay: '1s' }}></div>
+      </section>
+
+      {/* 📦 High-Performance Features */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6 max-w-7xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {[
+              { icon: Zap, color: 'text-orange-500', bg: 'bg-orange-50', title: 'Lightning Fast.', desc: 'Seamless shopping from discovery to doorstep.' },
+              { icon: Shield, color: 'text-blue-500', bg: 'bg-blue-50', title: 'Ironclad Security.', desc: 'Your data is protected by industry-leading encryption.' },
+              { icon: CreditCard, color: 'text-emerald-500', bg: 'bg-emerald-50', title: 'Smart Payments.', desc: 'Flexible options tailored for every lifestyle.' }
+            ].map((feature, i) => (
+              <div key={i} className="group p-10 rounded-[2.5rem] bg-white border border-slate-100 shadow-[0_10px_30px_rgba(0,0,0,0.02)] transition-all duration-500 hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] hover:-translate-y-2">
+                <div className={`w-14 h-14 ${feature.bg} ${feature.color} rounded-2xl flex items-center justify-center mb-8 rotate-3 group-hover:rotate-0 transition-transform duration-500 shadow-sm`}>
+                  <feature.icon className="w-8 h-8" />
+                </div>
+                <h3 className="font-bold text-2xl text-slate-900 mb-4 tracking-tight">{feature.title}</h3>
+                <p className="text-slate-500 font-medium leading-relaxed">{feature.desc}</p>
               </div>
-              <div className={`w-20 h-20 rounded-2xl flex items-center justify-center mb-6 shadow-sm z-10 ${cat.color} group-hover:scale-110 transition-transform duration-300`}>
-                <cat.icon className="w-10 h-10" />
-              </div>
-              <h3 className="text-xl font-bold text-slate-800 z-10">{cat.name}</h3>
-              <p className="text-blue-600 font-medium text-sm mt-3 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 z-10">
-                Explore Now →
-              </p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ✨ Immersive Categories Grid */}
+      <section className="py-24 bg-slate-50">
+        <div className="container mx-auto px-6 max-w-7xl">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div className="max-w-2xl">
+              <h2 className="text-5xl font-black text-slate-900 tracking-tighter mb-4">Design for everyone.</h2>
+              <p className="text-xl text-slate-500 font-medium">Choose a category and discover perfection.</p>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Link to="/products?category=Electronics" className="group relative h-[600px] rounded-[3.5rem] overflow-hidden bg-white border border-slate-200 transition-all duration-700 hover:border-blue-500/20">
+               <div className="absolute top-16 left-16 z-20">
+                  <h3 className="text-5xl font-black text-slate-900 tracking-tight mb-3">Electronics</h3>
+                  <p className="text-xl text-blue-600 font-bold flex items-center gap-2">Explore <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" /></p>
+               </div>
+               <img src="https://images.unsplash.com/photo-1621330396173-e41b18717937?w=1000&q=80" className="absolute bottom-[-10%] right-[-10%] w-[120%] h-full object-contain group-hover:scale-110 transition-transform duration-[2s] ease-out" alt="Tech" />
             </Link>
-          ))}
+            
+            <Link to="/products?category=Fashion" className="group relative h-[600px] rounded-[3.5rem] overflow-hidden bg-slate-900 transition-all duration-700">
+               <div className="absolute top-16 left-16 z-20">
+                  <h3 className="text-5xl font-black text-white tracking-tight mb-3">Fashion</h3>
+                  <p className="text-xl text-slate-400 font-bold flex items-center gap-2">Discover style <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" /></p>
+               </div>
+               <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1000&q=80')] bg-cover bg-center opacity-40 group-hover:opacity-70 group-hover:scale-105 transition-all duration-[2s]"></div>
+            </Link>
+
+            <Link to="/products?category=Gaming" className="group relative h-[600px] rounded-[3.5rem] overflow-hidden bg-indigo-600 transition-all duration-700">
+               <div className="absolute top-16 left-16 z-20">
+                  <h3 className="text-5xl font-black text-white tracking-tight mb-3">Gaming</h3>
+                  <p className="text-xl text-indigo-200 font-bold flex items-center gap-2">Enter the arena <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" /></p>
+               </div>
+               <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1000&q=80')] bg-cover bg-center opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-[2s]"></div>
+            </Link>
+
+            <Link to="/products?category=Luxury" className="group relative h-[600px] rounded-[3.5rem] overflow-hidden bg-amber-50 border border-amber-200 transition-all duration-700 hover:border-amber-400">
+               <div className="absolute top-16 left-16 z-20">
+                  <h3 className="text-5xl font-black text-amber-900 tracking-tight mb-3">Luxury</h3>
+                  <p className="text-xl text-amber-600 font-bold flex items-center gap-2">Timeless elegance <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" /></p>
+               </div>
+               <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=1000&q=80" className="absolute bottom-[-15%] right-[-15%] w-[110%] h-[90%] object-contain group-hover:scale-110 transition-transform duration-[2s] ease-out" alt="Luxury" />
+            </Link>
+          </div>
         </div>
       </section>
     </div>
